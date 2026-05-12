@@ -149,6 +149,12 @@ textarea:focus {
   border-color: rgba(11, 81, 187, 0.52);
 }
 
+input.field-readonly,
+textarea.field-readonly {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+
 .check {
   display: flex;
   align-items: center;

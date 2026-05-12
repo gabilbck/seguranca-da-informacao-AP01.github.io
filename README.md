@@ -1,5 +1,9 @@
 # Sistema de Ocorrências Acadêmicas — Protótipo Didático
 
+## Versão revisada (entrega)
+
+Nesta versão foram aplicadas melhorias de higiene de acesso e de apresentação: campos de login sem valores iniciais; perfil efetivo derivado apenas do usuário autenticado, sem seletor de escalonamento na interface; filtragem de ocorrências por matrícula ou turma conforme o papel; restrições de exclusão e de mudança de status; logs, exportação completa, limpeza de logs e restauração da base apenas para o perfil administrador; validação de confirmação de tratamento de dados; campo de turma para apoio ao escopo docente; neutralização de conteúdo dinâmico na tabela; exportação sem embutir segredos fictícios de cliente; mensagens explícitas sobre o caráter não produtivo do protótipo. O relatório técnico em texto estruturado para conversão em PDF encontra-se em `RELATORIO_Tecnico.md`. Quem já tiver executado uma versão anterior no mesmo navegador pode não ver os novos exemplos fictícios até usar **Restaurar dados iniciais** com o perfil administrador ou limpar o armazenamento local do site.
+
 Protótipo web desenvolvido para atividade prática da disciplina **Segurança da Informação**.
 
 O sistema simula um pequeno painel acadêmico usado para registrar, consultar e acompanhar ocorrências relacionadas a alunos. Ele foi construído com **HTML, CSS e JavaScript puro**, sem dependências externas, com o objetivo de permitir uma análise prática de decisões de segurança em uma aplicação simples.

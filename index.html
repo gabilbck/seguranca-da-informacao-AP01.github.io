@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sistema de Ocorrências Acadêmicas — versão inicial</title>
+  <title>Sistema de Ocorrências Acadêmicas — versão revisada</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -26,26 +26,26 @@
         <p class="eyebrow">Acesso</p>
         <h2>Entrar no sistema</h2>
         <p class="muted-text">
-          Use um dos usuários de demonstração para acessar o painel.
+          Informe suas credenciais de demonstração conforme listado abaixo. Os campos de autenticação iniciam vazios por padrão.
         </p>
       </div>
 
       <form id="loginForm" class="form-grid">
         <label>
           E-mail
-          <input id="email" type="email" value="professor@faculdade.local" autocomplete="email" />
+          <input id="email" type="email" value="" autocomplete="username" />
         </label>
 
         <label>
           Senha
-          <input id="password" type="password" value="123456" autocomplete="current-password" />
+          <input id="password" type="password" value="" autocomplete="current-password" />
         </label>
 
         <button class="btn primary" type="submit">Entrar</button>
       </form>
 
       <div class="demo-users">
-        <h3>Usuários de demonstração</h3>
+        <h3>Usuários de demonstração (fictícios)</h3>
         <ul>
           <li><strong>aluno@faculdade.local</strong> / 123456</li>
           <li><strong>professor@faculdade.local</strong> / 123456</li>
@@ -55,25 +55,19 @@
     </section>
 
     <section id="appView" class="hidden">
+      <section class="card notice" id="limitationBanner">
+        <p><strong>Advertência operacional.</strong> Este protótipo executa somente no navegador, sem servidor de autenticação, sem API e sem banco de dados central. Os controles de perfil aplicados nesta interface constituem simulação pedagógica e podem ser contornados por qualquer pessoa com acesso ao código ou às ferramentas de desenvolvimento do navegador. Não utilize dados reais.</p>
+      </section>
+
       <section class="grid two">
         <article class="card">
           <p class="eyebrow">Usuário atual</p>
           <h2 id="currentUserName">—</h2>
           <p id="currentUserDetails" class="muted-text">—</p>
-
-          <div class="role-switch">
-            <label>
-              Perfil ativo
-              <select id="roleSelect">
-                <option value="ALUNO">Aluno</option>
-                <option value="PROFESSOR">Professor</option>
-                <option value="ADMIN">Administrador</option>
-              </select>
-            </label>
-          </div>
+          <p id="accessScopeLabel" class="muted-text"></p>
         </article>
 
-        <article class="card">
+        <article class="card hidden" id="quickActionsCard">
           <p class="eyebrow">Ações rápidas</p>
           <h2>Ferramentas do painel</h2>
           <div class="actions">
@@ -97,12 +91,17 @@
 
             <label>
               Matrícula
-              <input id="studentId" type="text" placeholder="Ex.: 202400123" />
+              <input id="studentId" type="number" placeholder="Ex.: 202400123" maxlength="8"/>
+            </label>
+
+            <label id="studentClassWrap">
+              Turma
+              <input id="studentClass" type="text" placeholder="Ex.: 5A" maxlength="8" />
             </label>
 
             <label>
               CPF
-              <input id="studentCpf" type="text" placeholder="Ex.: 000.000.000-00" />
+              <input id="studentCpf" type="number" placeholder="Ex.: 000.000.000-00" maxlength="14"/>
             </label>
 
             <label>
@@ -112,7 +111,7 @@
 
             <label>
               Telefone
-              <input id="studentPhone" type="text" placeholder="(00) 00000-0000" />
+              <input id="studentPhone" type="number" placeholder="(00) 00000-0000" maxlength="15"/>
             </label>
 
             <label>
@@ -161,7 +160,14 @@
 
           <label>
             Termo de busca
-            <input id="search" type="search" placeholder="Nome, matrícula, CPF, e-mail ou texto..." />
+            <input
+              id="occurrenceSearchInput"
+              type="text"
+              name="occurrenceSearch"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="Nome, matrícula, CPF, e-mail ou texto..."
+            />
           </label>
 
           <div class="summary">
@@ -175,8 +181,8 @@
             </div>
           </div>
 
-          <div class="notice">
-            A busca percorre todos os campos cadastrados e todos os perfis acessam a mesma base.
+          <div class="notice" id="searchNotice">
+            A busca percorre os campos do registro dentro do conjunto visível ao seu perfil.
           </div>
         </article>
       </section>
@@ -209,7 +215,7 @@
         </div>
       </section>
 
-      <section class="card">
+      <section class="card hidden" id="auditSection">
         <div class="section-header">
           <div>
             <p class="eyebrow">Auditoria</p>
@@ -225,7 +231,7 @@
 
   <footer class="footer">
     <p>
-      Protótipo estático para atividade prática. Publicável em GitHub Pages.
+      Protótipo estático para atividade prática. Publicável em GitHub Pages. Os requisitos de produção exigem back-end, HTTPS, políticas institucionais e controles em servidor.
     </p>
   </footer>
 
